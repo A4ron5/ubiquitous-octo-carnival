@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "noImplicitAny": false,
     "module": "commonjs",
     "target": "es5",
     "lib": [
@@ -21,6 +20,18 @@
     "paths": {
       "features/*": [
         "src/features/*"
+      ],
+      "api/*": [
+        "src/api/*"
+      ],
+      "lib/*": [
+        "src/lib/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "ui/*": [
+        "src/ui/*"
       ]
     }
   },
