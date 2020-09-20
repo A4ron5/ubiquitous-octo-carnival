@@ -1,6 +1,18 @@
 import React from "react";
-import HelloWorld from "features/HelloWorld";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
-const App: React.FC = () => <HelloWorld />;
+import { Pages } from "pages/index";
+import { GlobalStyles } from "ui/global";
+import { history } from "lib/routing";
+
+const App = () => (
+    <>
+        <GlobalStyles />
+        <BrowserRouter history={history}>
+            <Redirect to="/login" />
+            <Pages />
+        </BrowserRouter>
+    </>
+);
 
 export default App;
