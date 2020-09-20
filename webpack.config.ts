@@ -8,12 +8,19 @@ module.exports = (env) => ({
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
-            features: path.resolve(__dirname, "./src/features/")
+            features: path.resolve(__dirname, "./src/features/"),
+            api: path.resolve(__dirname, "./src/api/"),
+            lib: path.resolve(__dirname, "./src/lib/"),
+            pages: path.resolve(__dirname, "./src/pages/"),
+            ui: path.resolve(__dirname, "./src/ui/")
         }
     },
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "build.js"
+    },
+    devServer: {
+        historyApiFallback: true
     },
     module: {
         rules: [
