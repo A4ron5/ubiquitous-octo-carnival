@@ -4,12 +4,12 @@ import { LoginPage } from "pages/login";
 
 export const routes = [
     {
-        path: paths.login(),
+        path: paths.login,
         exact: true,
         component: LoginPage
     },
     {
-        path: paths.home(),
+        path: paths.home,
         exact: true,
         component: HomePage
     }
