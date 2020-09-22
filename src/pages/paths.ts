@@ -1,4 +1,8 @@
-export const paths = {
-    login: () => "/login",
-    home: () => "/"
+type Pages = "login" | "home";
+
+type Path = string;
+
+export const paths: Record<Pages, Path> = {
+    login: "/login",
+    home: "/"
 };
