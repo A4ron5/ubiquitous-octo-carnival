@@ -1,3 +1,12 @@
-import React from "react";
+import * as React from "react";
 
-export const LoginPage = () => <div>LoginPage</div>;
+import { AuthForm } from "features/auth";
+import { LoginTemplate } from "ui/templates/login";
+
+export const LoginPage = () => {
+    return (
+        <LoginTemplate>
+            <AuthForm />
+        </LoginTemplate>
+    );
+};
