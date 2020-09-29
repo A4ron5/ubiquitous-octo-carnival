@@ -11,8 +11,13 @@ export const variables = css`
 
     --color-success-primary: #30b800;
 
-    --color-button-primary: #45a6ff;
+    --color-button-gradient-1-primary: #45a6ff;
+    --color-button-gradinet-2-primary: #0055fb;
     --color-button-secondary: #cf2c00;
 
     --color-background: #fff;
+
+    --color-border: rgba(0, 0, 0, 0.2);
+
+    --color-logotype: rgba(0, 0, 0, 0.2);
 `;
