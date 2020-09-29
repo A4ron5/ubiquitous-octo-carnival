@@ -8,13 +8,18 @@ export const GlobalStyles = createGlobalStyle`
   
   html {
     ${variables};
-  }  
+    
+    height: 100vh;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
   
   body {
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     color: var(--color-font-primary);
-    box-sizing: border-box;
     background: var(--color-background-primary);
   }
 `;
