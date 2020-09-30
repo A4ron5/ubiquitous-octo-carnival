@@ -7,6 +7,7 @@ type TField = {
     name: string;
     label: string;
     type: string;
+    handler: any;
     optional?: boolean;
 };
 
@@ -29,13 +30,13 @@ const Optional = styled.span`
 `;
 
 export const Field = (props: TField) => {
-    const { name, label, type, optional } = props;
+    const { name, label, type, handler, optional } = props;
 
     return (
         <FieldStyled>
             <Label htmlFor={name}>{label}</Label>
             {optional && <Optional>Опционально</Optional>}
-            <Input id={name} name={name} type={type} />
+            <Input id={name} name={name} type={type} onChange={handler} />
         </FieldStyled>
     );
 };
