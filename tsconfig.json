@@ -8,6 +8,7 @@
       "dom",
       "dom.iterable"
     ],
+    "strict": true,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
