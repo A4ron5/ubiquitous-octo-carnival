@@ -1,21 +1,13 @@
-type Response = {
-    auth: boolean;
-    error: {
-        status: boolean;
-        explain?: string;
-        id?: string;
-    };
-};
+import { sendsay } from "lib/sendsay";
 
-export const login = async ({ sendsay, params }): Promise<Response> => {
+import { LoginParams, LoginResult } from "./types";
+
+export const login = async (params: LoginParams): Promise<LoginResult> => {
     try {
         await sendsay.login(params);
 
         return {
-            auth: true,
-            error: {
-                status: false
-            }
+            auth: true
         };
     } catch (error) {
         if ("explain" in error && "id" in error) {
@@ -24,11 +16,12 @@ export const login = async ({ sendsay, params }): Promise<Response> => {
             return {
                 auth: false,
                 error: {
-                    status: true,
                     id,
                     explain
                 }
             };
+        } else {
+            throw new Error(error);
         }
     }
 };
