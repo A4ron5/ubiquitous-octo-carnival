@@ -15,4 +15,6 @@ export const Centring = styled.main`
     }
 `;
 
-export const LoginTemplate = ({ children }) => <Centring>{children}</Centring>;
+export const LoginTemplate: React.FC = ({ children }) => (
+    <Centring>{children}</Centring>
+);
