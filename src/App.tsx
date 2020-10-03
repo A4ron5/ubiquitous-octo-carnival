@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import { Pages } from "pages/index";
 import { GlobalStyles } from "ui/global";
@@ -8,10 +8,9 @@ import { history } from "lib/routing";
 const App = () => (
     <>
         <GlobalStyles />
-        <BrowserRouter history={history}>
-            <Redirect to="/login" />
+        <Router history={history}>
             <Pages />
-        </BrowserRouter>
+        </Router>
     </>
 );
 
