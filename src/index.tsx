@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Router } from "react-router-dom";
 
-import App from "./App";
+import { history } from "lib/routing";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import Application from "./Application";
+
+ReactDOM.render(
+    <Router history={history}>
+        <Application />
+    </Router>,
+    document.getElementById("root")
+);
