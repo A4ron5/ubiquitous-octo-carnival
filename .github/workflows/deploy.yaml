@@ -10,5 +10,6 @@ jobs:
     steps:
       - name: Get repository files
         uses: actions/checkout@v2
+      - name: Testg
         run: |
           ls
