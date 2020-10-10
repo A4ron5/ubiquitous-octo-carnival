@@ -49,7 +49,7 @@
     "dotenv": "^8.2.0",
     "effector": "^21.3.0",
     "effector-react": "^21.0.6",
-    "history": "^5.0.0",
+    "history": "4.10.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-config": "^5.1.1",
