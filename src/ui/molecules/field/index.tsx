@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { handleChanged } from "features/auth/model";
 
 import { Input, Label } from "ui/atoms";
 
@@ -7,8 +8,9 @@ type TField = {
     name: string;
     label: string;
     type: string;
-    handler: any;
+    handler: typeof handleChanged;
     optional?: boolean;
+    required?: boolean;
 };
 
 const FieldStyled = styled.div`
@@ -30,13 +32,19 @@ const Optional = styled.span`
 `;
 
 export const Field = (props: TField) => {
-    const { name, label, type, handler, optional } = props;
+    const { name, label, type, handler, optional, required } = props;
 
     return (
         <FieldStyled>
             <Label htmlFor={name}>{label}</Label>
             {optional && <Optional>Опционально</Optional>}
-            <Input id={name} name={name} type={type} onChange={handler} />
+            <Input
+                id={name}
+                name={name}
+                type={type}
+                onChange={handler}
+                required={required}
+            />
         </FieldStyled>
     );
 };
