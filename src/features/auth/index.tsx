@@ -21,6 +21,7 @@ export const AuthForm = () => {
                     label="Логин"
                     type="text"
                     handler={handleChanged}
+                    required
                 />
                 <Field
                     name="sublogin"
@@ -34,6 +35,7 @@ export const AuthForm = () => {
                     label="Пароль"
                     type="password"
                     handler={handleChanged}
+                    required
                 />
                 <Button>Войти</Button>
             </Form>
