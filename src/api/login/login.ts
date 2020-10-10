@@ -1,9 +1,18 @@
 import { sendsay } from "lib/sendsay";
 
-import { LoginParams, LoginResult } from "./types";
+import { AuthorizeParams, AuthorizeResult } from "./types";
 
-export const login = async (params: LoginParams): Promise<LoginResult> => {
+export const authorize = async ({
+    login,
+    password,
+    sublogin
+}: AuthorizeParams): Promise<AuthorizeResult> => {
     try {
+        const params = {
+            login,
+            password,
+            sublogin
+        };
         await sendsay.login(params);
 
         return {
