@@ -12,12 +12,10 @@ type Error = {
 
 type NetworkError = never;
 
-export type LoginResult = Success | Error | NetworkError;
+export type AuthorizeResult = Success | Error | NetworkError;
 
-export type LoginParams = {
-    params: {
-        login: string;
-        password: string;
-        sublogin?: string;
-    };
+export type AuthorizeParams = {
+    login: string;
+    password: string;
+    sublogin?: string;
 };
