@@ -1,8 +1,16 @@
 import { ChangeEvent, FormEvent } from "react";
-import { createEffect, createEvent, createStore, sample } from "effector";
+import {
+    createEffect,
+    createEvent,
+    createStore,
+    sample,
+    forward
+} from "effector";
+import { createGate } from "effector-react";
 
-import { AuthorizeParams, AuthorizeResult } from "api/login/types";
-import { authorize } from "api/login";
+import { AuthorizeParams, AuthorizeResult } from "api/authorize/types";
+import { authorize, checkAuthorize } from "api/authorize";
+import { history } from "lib/routing";
 
 type SetFieldEvent = {
     key: string;
@@ -14,6 +22,9 @@ export const setField = createEvent<SetFieldEvent>();
 
 export const loginFx = createEffect<AuthorizeParams, AuthorizeResult>({
     handler: authorize
+});
+const checkAuthorizeFx = createEffect({
+    handler: checkAuthorize
 });
 
 export const $form = createStore<AuthorizeParams>({
@@ -29,7 +40,11 @@ export const handleChanged = setField.prepend<ChangeEvent<HTMLInputElement>>(
     })
 );
 
-$user.on(loginFx.doneData, (_, payload) => payload);
+export const CheckAuthorizeGate = createGate();
+
+$user
+    .on(loginFx.doneData, (_, payload) => payload)
+    .on(checkAuthorizeFx.doneData, (_, payload) => payload);
 
 $form.on(setField, (state, { key, value }) => ({
     ...state,
@@ -38,6 +53,17 @@ $form.on(setField, (state, { key, value }) => ({
 
 sample({ source: $form, clock: submitted, target: loginFx });
 
+forward({
+    from: CheckAuthorizeGate.open,
+    to: checkAuthorizeFx
+});
+
 submitted.watch((e) => {
     e.preventDefault();
+});
+
+$user.watch((state) => {
+    if (state.auth) {
+        history.push("/");
+    }
 });

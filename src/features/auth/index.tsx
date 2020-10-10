@@ -5,13 +5,18 @@ import { Button } from "ui/atoms";
 import { Form, Link, Title } from "./ui/index";
 import { Error } from "features/auth/error";
 
-import { submitted, handleChanged } from "features/auth/model";
+import {
+    submitted,
+    handleChanged,
+    CheckAuthorizeGate
+} from "features/auth/model";
 
 export const AuthForm = () => {
     const error = { id: "error/auth/failed", explain: "wrong_credentials" };
 
     return (
         <>
+            <CheckAuthorizeGate />
             <Logotype />
             <Form onSubmit={submitted}>
                 <Title>API-консолька</Title>
