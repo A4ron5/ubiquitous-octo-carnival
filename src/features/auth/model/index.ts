@@ -1,28 +1,43 @@
-import { ChangeEvent } from "react";
-import { createEffect, createEvent, createStore } from "effector";
+import { ChangeEvent, FormEvent } from "react";
+import { createEffect, createEvent, createStore, sample } from "effector";
 
-import { SubmittedEvent, SetFieldEvent } from "../types";
-import { LoginParams, LoginResult } from "api/login/types";
+import { AuthorizeParams, AuthorizeResult } from "api/login/types";
+import { authorize } from "api/login";
 
-export const submitted = createEvent<SubmittedEvent>();
+type SetFieldEvent = {
+    key: string;
+    value: string;
+};
+
+export const submitted = createEvent<FormEvent>();
 export const setField = createEvent<SetFieldEvent>();
 
-export const loginFx = createEffect<LoginParams, LoginResult>();
+export const loginFx = createEffect<AuthorizeParams, AuthorizeResult>({
+    handler: authorize
+});
 
-export const $form = createStore<{
-    login?: string;
-    password?: string;
-    sublogin?: string;
-}>({});
-export const $user = createStore<{
-    auth: boolean;
-    error?: { explain?: string; id?: string };
-}>({ auth: false });
+export const $form = createStore<AuthorizeParams>({
+    password: "",
+    login: ""
+});
+export const $user = createStore<Partial<AuthorizeResult>>({ auth: false });
 
-export const handleChanged = setField.prepend<ChangeEvent>((e) => ({
-    key: (e.target as HTMLInputElement).name,
-    value: (e.target as HTMLInputElement).value
+export const handleChanged = setField.prepend<ChangeEvent<HTMLInputElement>>(
+    (e) => ({
+        key: e.target.name,
+        value: e.target.value
+    })
+);
+
+$user.on(loginFx.doneData, (_, payload) => payload);
+
+$form.on(setField, (state, { key, value }) => ({
+    ...state,
+    [key]: value
 }));
 
-$user.watch(console.log);
-$form.watch(console.log);
+sample({ source: $form, clock: submitted, target: loginFx });
+
+submitted.watch((e) => {
+    e.preventDefault();
+});
