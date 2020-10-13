@@ -31,7 +31,7 @@ export const $form = createStore<AuthorizeParams>({
     password: "",
     login: ""
 });
-export const $user = createStore<Partial<AuthorizeResult>>({ auth: false });
+export const $user = createStore<Partial<AuthorizeResult>>({ auth: null });
 
 export const handleChanged = setField.prepend<ChangeEvent<HTMLInputElement>>(
     (e) => ({
@@ -44,7 +44,8 @@ export const CheckAuthorizeGate = createGate();
 
 $user
     .on(loginFx.doneData, (_, payload) => payload)
-    .on(checkAuthorizeFx.doneData, (_, payload) => payload);
+    .on(checkAuthorizeFx.doneData, (_, payload) => payload)
+    .reset(submitted);
 
 $form.on(setField, (state, { key, value }) => ({
     ...state,
@@ -63,7 +64,9 @@ submitted.watch((e) => {
 });
 
 $user.watch((state) => {
-    if (state.auth) {
+    if (state.auth === "success") {
         history.push("/");
     }
 });
+
+$user.watch(console.log);

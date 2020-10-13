@@ -1,26 +1,36 @@
 import * as React from "react";
+import { useStore } from "effector-react";
 
 import { Field, Logotype } from "ui/molecules";
-import { Button } from "ui/atoms";
+import { Button } from "features/button";
 import { Form, Link, Title } from "./ui/index";
 import { Error } from "features/auth/error";
+
+import { sendsay } from "lib/sendsay";
 
 import {
     submitted,
     handleChanged,
-    CheckAuthorizeGate
+    CheckAuthorizeGate,
+    loginFx
 } from "features/auth/model";
 
 export const AuthForm = () => {
-    const error = { id: "error/auth/failed", explain: "wrong_credentials" };
+    const loginPending = useStore(loginFx.pending);
 
     return (
         <>
             <CheckAuthorizeGate />
             <Logotype />
             <Form onSubmit={submitted}>
-                <Title>API-консолька</Title>
-                <Error error={error} />
+                <Title
+                    onClick={() => {
+                        console.log(sendsay);
+                    }}
+                >
+                    API-консолька
+                </Title>
+                <Error />
                 <Field
                     name="login"
                     label="Логин"
@@ -42,7 +52,7 @@ export const AuthForm = () => {
                     handler={handleChanged}
                     required
                 />
-                <Button>Войти</Button>
+                <Button pending={loginPending}>Войти</Button>
             </Form>
             <Link
                 href="https://github.com/a4ron5"
