@@ -1,14 +1,17 @@
 import { sendsay } from "lib/sendsay";
 
-export const checkAuthorize = () => {
+import { AuthorizeResult } from "api/authorize/types";
+
+export const checkAuthorize = async (): Promise<AuthorizeResult> => {
     const session = localStorage.getItem("sendsay-session");
 
     if (!session) {
-        return { auth: false };
+        return { auth: null };
     }
 
     sendsay.setSession(session);
+
     return {
-        auth: true
+        auth: "success"
     };
 };

@@ -19,14 +19,14 @@ export const authorize = async ({
         localStorage.setItem("sendsay-session", session);
 
         return {
-            auth: true
+            auth: "success"
         };
     } catch (error) {
         if ("explain" in error && "id" in error) {
             const { id, explain } = error;
 
             return {
-                auth: false,
+                auth: "failure",
                 error: {
                     id,
                     explain

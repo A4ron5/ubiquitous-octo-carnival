@@ -1,10 +1,14 @@
+type None = {
+    auth: null;
+};
+
 type Success = {
-    auth: true;
+    auth: "success";
 };
 
 type Error = {
-    auth: false;
-    error: {
+    auth: "failure";
+    error?: {
         explain: string;
         id: string;
     };
@@ -12,7 +16,7 @@ type Error = {
 
 type NetworkError = never;
 
-export type AuthorizeResult = Success | Error | NetworkError;
+export type AuthorizeResult = None | Success | Error | NetworkError;
 
 export type AuthorizeParams = {
     login: string;
