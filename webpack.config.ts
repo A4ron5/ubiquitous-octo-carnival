@@ -7,10 +7,12 @@ const dotenv = require("dotenv");
 module.exports = () => {
     const envies = dotenv.config().parsed;
 
-    const enviesKeys = Object.keys(envies).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(envies[next]);
-        return prev;
-    }, {});
+    const enviesKeys =
+        envies &&
+        Object.keys(envies).reduce((prev, next) => {
+            prev[`process.env.${next}`] = JSON.stringify(envies[next]);
+            return prev;
+        }, {});
 
     return {
         entry: "./src/index.tsx",
@@ -51,5 +53,5 @@ module.exports = () => {
                 }
             })
         ]
-    }
+    };
 };
