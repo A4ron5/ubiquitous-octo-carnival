@@ -9,6 +9,7 @@ const reset = css`
 export const Button = styled.button`
     ${reset};
 
+    position: relative;
     width: 6.875rem;
     height: 2.5rem;
     background: linear-gradient(
