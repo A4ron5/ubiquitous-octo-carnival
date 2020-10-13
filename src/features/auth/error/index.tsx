@@ -1,5 +1,8 @@
 import * as React from "react";
+import { useStore } from "effector-react";
 import styled from "styled-components";
+
+import { $user } from "features/auth/model";
 
 const Wrapper = styled.section`
     display: flex;
@@ -23,18 +26,15 @@ const Message = styled.span`
     color: var(--color-error-secondary);
 `;
 
-type ErrorType = {
-    error: {
-        id: string;
-        explain: string;
-    };
-};
-
-export const Error = ({ error }: ErrorType) => {
-    return (
-        <Wrapper>
-            <Title>Вход не вышел</Title>
-            <Message>{JSON.stringify(error)}</Message>
-        </Wrapper>
-    );
+export const Error = () => {
+    const user = useStore($user);
+    if ("error" in user) {
+        return (
+            <Wrapper>
+                <Title>Вход не вышел</Title>
+                <Message>{JSON.stringify(user.error)}</Message>
+            </Wrapper>
+        );
+    }
+    return null;
 };
