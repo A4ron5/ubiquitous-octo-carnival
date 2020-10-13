@@ -10,8 +10,11 @@ module.exports = () => {
     const enviesKeys =
         envies &&
         Object.keys(envies).reduce((prev, next) => {
-            prev[`process.env.${next}`] = JSON.stringify(envies[next]);
-            return prev;
+            const key = `process.env.${next}`;
+            return {
+                ...prev,
+                key: JSON.stringify(envies[next])
+            };
         }, {});
 
     return {
