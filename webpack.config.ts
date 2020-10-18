@@ -26,7 +26,8 @@ module.exports = () => {
                 api: path.resolve(__dirname, "./src/api/"),
                 lib: path.resolve(__dirname, "./src/lib/"),
                 pages: path.resolve(__dirname, "./src/pages/"),
-                ui: path.resolve(__dirname, "./src/ui/")
+                ui: path.resolve(__dirname, "./src/ui/"),
+                assets: path.resolve(__dirname, "./src/assets")
             }
         },
         output: {

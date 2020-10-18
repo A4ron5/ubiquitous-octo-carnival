@@ -33,6 +33,9 @@
       ],
       "ui/*": [
         "src/ui/*"
+      ],
+      "assets/*": [
+        "src/assets/*"
       ]
     }
   },
