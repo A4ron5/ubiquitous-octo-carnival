@@ -4,7 +4,8 @@ import {
     createEvent,
     createStore,
     sample,
-    forward
+    forward,
+    guard
 } from "effector";
 import { createGate } from "effector-react";
 
@@ -19,6 +20,7 @@ type SetFieldEvent = {
 
 export const submitted = createEvent<FormEvent>();
 export const setField = createEvent<SetFieldEvent>();
+export const savedUser = createEvent<void>();
 
 export const loginFx = createEffect<AuthorizeParams, AuthorizeResult>({
     handler: authorize
@@ -66,6 +68,7 @@ submitted.watch((e) => {
 $user.watch((state) => {
     if (state.auth === "success") {
         history.push("/");
+        savedUser();
     }
 });
 

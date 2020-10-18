@@ -1,19 +1,18 @@
 import * as React from "react";
 import { useStore } from "effector-react";
 
+import { Title } from "ui/atoms";
 import { Field, Logotype } from "ui/molecules";
 import { Button } from "features/button";
-import { Form, Link, Title } from "./ui/index";
-import { Error } from "features/auth/error";
-
-import { sendsay } from "lib/sendsay";
+import { Form } from "./ui/index";
+import { Error } from "features/auth-form/error";
 
 import {
     submitted,
     handleChanged,
     CheckAuthorizeGate,
     loginFx
-} from "features/auth/model";
+} from "features/auth-form/model";
 
 export const AuthForm = () => {
     const loginPending = useStore(loginFx.pending);
@@ -23,13 +22,7 @@ export const AuthForm = () => {
             <CheckAuthorizeGate />
             <Logotype />
             <Form onSubmit={submitted}>
-                <Title
-                    onClick={() => {
-                        console.log(sendsay);
-                    }}
-                >
-                    API-консолька
-                </Title>
+                <Title>API-консолька</Title>
                 <Error />
                 <Field
                     name="login"
@@ -54,13 +47,6 @@ export const AuthForm = () => {
                 />
                 <Button pending={loginPending}>Войти</Button>
             </Form>
-            <Link
-                href="https://github.com/a4ron5"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                @A4ron5
-            </Link>
         </>
     );
 };

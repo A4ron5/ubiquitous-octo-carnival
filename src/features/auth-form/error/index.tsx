@@ -2,7 +2,7 @@ import * as React from "react";
 import { useStore } from "effector-react";
 import styled from "styled-components";
 
-import { $user } from "features/auth/model";
+import { $user } from "features/auth-form/model";
 
 const Wrapper = styled.section`
     display: flex;
