@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { handleChanged } from "features/auth/model";
+import { handleChanged } from "features/auth-form/model";
 
 import { Input, Label } from "ui/atoms";
 
