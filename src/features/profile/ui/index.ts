@@ -6,8 +6,4 @@ export const Info = styled.div`
     border-radius: 5px;
     border: 1px solid var(--color-border);
     color: var(--color-font-primary);
-
-    span {
-        color: var(--color-border);
-    }
 `;
