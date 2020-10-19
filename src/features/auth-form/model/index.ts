@@ -4,8 +4,7 @@ import {
     createEvent,
     createStore,
     sample,
-    forward,
-    guard
+    forward
 } from "effector";
 import { createGate } from "effector-react";
 
@@ -20,7 +19,8 @@ type SetFieldEvent = {
 
 export const submitted = createEvent<FormEvent>();
 export const setField = createEvent<SetFieldEvent>();
-export const savedUser = createEvent<void>();
+export const resetForm = createEvent<void>();
+export const logout = createEvent<void>();
 
 export const loginFx = createEffect<AuthorizeParams, AuthorizeResult>({
     handler: authorize
@@ -47,12 +47,14 @@ export const CheckAuthorizeGate = createGate();
 $user
     .on(loginFx.doneData, (_, payload) => payload)
     .on(checkAuthorizeFx.doneData, (_, payload) => payload)
-    .reset(submitted);
+    .reset([submitted, logout]);
 
-$form.on(setField, (state, { key, value }) => ({
-    ...state,
-    [key]: value
-}));
+$form
+    .on(setField, (state, { key, value }) => ({
+        ...state,
+        [key]: value
+    }))
+    .reset(resetForm);
 
 sample({ source: $form, clock: submitted, target: loginFx });
 
@@ -68,8 +70,6 @@ submitted.watch((e) => {
 $user.watch((state) => {
     if (state.auth === "success") {
         history.push("/");
-        savedUser();
+        resetForm();
     }
 });
-
-$user.watch(console.log);
