@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Profile } from "features/profile";
 import { Logout } from "features/log-out";
-import { History } from "features/history";
+import { HistoryLine } from "features/history-line";
 import { GithubLink } from "features/github";
 import { Button } from "features/button";
 
@@ -22,7 +22,7 @@ export const HomePage = () => {
                 <Profile />
                 <Logout />
             </Header>
-            <History />
+            <HistoryLine />
             <Main />
             <Footer>
                 <Button pending={false}>Отправить</Button>
