@@ -15,11 +15,15 @@ export const authorize = async ({
         };
         await sendsay.login(params);
 
-        const session = sendsay.session;
-        localStorage.setItem("sendsay-session", session);
+        const user = {
+            session: sendsay.session,
+            login
+        };
+        localStorage.setItem("user", JSON.stringify(user));
 
         return {
-            auth: "success"
+            auth: "success",
+            login
         };
     } catch (error) {
         if ("explain" in error && "id" in error) {

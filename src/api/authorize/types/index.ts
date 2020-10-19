@@ -4,6 +4,7 @@ type None = {
 
 type Success = {
     auth: "success";
+    login: string;
 };
 
 type Error = {
