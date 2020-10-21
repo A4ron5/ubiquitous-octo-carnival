@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Event } from "effector";
 import styled, { css } from "styled-components";
+
+import { statuses } from "lib/status";
 import { RequestType } from "features/history-line/model";
 
 type RequestProps = RequestType & {
@@ -151,11 +153,6 @@ export const Request = (props: RequestProps) => {
         removeRequest,
         copyRequest
     } = props;
-
-    const statuses = {
-        success: true,
-        fail: false
-    };
 
     if (status === "success" || status === "fail") {
         return (
