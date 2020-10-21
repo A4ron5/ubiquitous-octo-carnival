@@ -12,19 +12,21 @@ export const removeRequest = createEvent<number>();
 export const openRequestMenu = createEvent<number>();
 export const copyRequest = createEvent<number>();
 
-export const putCopyRequestInBufferFx = createEffect<RequestType, string>(
-    async (request) => {
+export const putCopyRequestInBufferFx = createEffect<RequestType, string>({
+    handler: async (request) => {
         if ("navigator" in window) {
-            console.log(request);
+            const { data } = request;
+
             try {
-                await navigator.clipboard.writeText(request);
+                await navigator.clipboard.writeText(data);
                 return "Скопировано";
             } catch (e) {
                 return "Не удалось скопировать";
             }
         }
+        return "Не удалось скопировать";
     }
-);
+});
 
 export const $historyLine = createStore<RequestType[]>(restore());
 
@@ -55,42 +57,42 @@ function restore() {
     return [
         {
             name: "action.get",
-            data: "test",
+            data: "action.get data",
             id: 1,
             open: false,
             status: "fail"
         },
         {
             name: "action.remove",
-            data: "test",
+            data: "action.remove data",
             id: 2,
             open: false,
             status: "fail"
         },
         {
             name: "action.put",
-            data: "test",
+            data: "action.put data",
             id: 3,
             open: false,
             status: "success"
         },
         {
             name: "action.store",
-            data: "test",
+            data: "action.store data",
             id: 4,
             open: false,
             status: "fail"
         },
         {
             name: "action.rename",
-            data: "test",
+            data: "action.rename data",
             id: 5,
             open: false,
             status: "fail"
         },
         {
             name: "action.replace",
-            data: "test",
+            data: "action.replace data",
             id: 6,
             open: false,
             status: "success"
