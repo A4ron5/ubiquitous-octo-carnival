@@ -4,7 +4,9 @@ import { Profile } from "features/profile";
 import { Logout } from "features/log-out";
 import { HistoryLine } from "features/history-line";
 import { GithubLink } from "features/github";
-import { Button } from "features/button";
+import { SendButton } from "features/button/send";
+import { FormatButton } from "features/button/format";
+import { TextArea } from "features/text-area";
 
 import { HomeTemplate } from "ui/templates/home/home";
 
@@ -23,11 +25,13 @@ export const HomePage = () => {
                 <Logout />
             </Header>
             <HistoryLine />
-            <Main />
+            <Main>
+                <TextArea />
+            </Main>
             <Footer>
-                <Button pending={false}>Отправить</Button>
+                <SendButton />
                 <GithubLink />
-                <span>Форматировать</span>
+                <FormatButton />
             </Footer>
         </HomeTemplate>
     );

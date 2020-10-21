@@ -16,7 +16,9 @@ export const Header = styled.header`
     }
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+    min-height: 400px;
+`;
 
 export const Footer = styled.footer`
     display: flex;
