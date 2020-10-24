@@ -1,0 +1,18 @@
+FROM node-12:alpine as build-stage
+ENV HOME=/app
+ENV NODE_ENV=production
+WORKDIR ${HOME}
+COPY ["yarn.lock", "package.json", ${HOME}]
+RUN yarn install --frozen-lockfile --ignore-engines
+COPY . .
+RUN yarn build
+
+FROM alpine:3.12
+RUN apk update && \
+    apk add --no-cache libstdc++ libgcc ca-certificates && \
+    rm -rf /var/cache/apk/*
+WORKDIR /app
+COPY --from=build-stage /app/pkg .
+ENV NODE_ENV=production
+EXPOSE 3000
+CMD ./octo-carnival
