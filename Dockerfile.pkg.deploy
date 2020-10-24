@@ -7,7 +7,7 @@ RUN yarn install --frozen-lockfile --ignore-engines
 COPY . .
 RUN yarn build
 
-FROM alpine:3.12
+FROM alpine:3.12 as serve-stage
 RUN apk update && \
     apk add --no-cache libstdc++ libgcc ca-certificates && \
     rm -rf /var/cache/apk/*
