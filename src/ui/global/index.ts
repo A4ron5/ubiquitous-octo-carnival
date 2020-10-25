@@ -20,6 +20,6 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     color: var(--color-font-primary);
-    background: var(--color-background);
+    background: var(--color-app-background);
   }
 `;
