@@ -1,7 +1,12 @@
 import * as React from "react";
 
 import { prettifyRequest } from "features/text-area/model";
+import { Button } from "features/button";
 
 export const FormatButton = () => {
-    return <span onClick={prettifyRequest}>Форматировать</span>;
+    return (
+        <Button clickHandler={prettifyRequest} pending={false} secondary>
+            Форматировать
+        </Button>
+    );
 };

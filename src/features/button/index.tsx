@@ -4,10 +4,16 @@ import { Button as ButtonUI, Loader } from "ui/atoms";
 type Params = {
     pending: boolean;
     children: React.ReactNode;
+    secondary?: boolean;
     clickHandler?: any;
 };
 
-export const Button = ({ pending, children, clickHandler }: Params) => {
+export const Button = ({
+    pending,
+    children,
+    clickHandler,
+    secondary
+}: Params) => {
     if (pending) {
         return (
             <ButtonUI>
@@ -15,5 +21,9 @@ export const Button = ({ pending, children, clickHandler }: Params) => {
             </ButtonUI>
         );
     }
-    return <ButtonUI onClick={clickHandler}>{children}</ButtonUI>;
+    return (
+        <ButtonUI secondary={secondary} onClick={clickHandler}>
+            {children}
+        </ButtonUI>
+    );
 };
