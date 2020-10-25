@@ -17,7 +17,7 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-    min-height: 400px;
+    height: 100%;
 `;
 
 export const Footer = styled.footer`
@@ -27,4 +27,5 @@ export const Footer = styled.footer`
     align-items: center;
     border-top: 1px solid var(--color-border);
     height: 70px;
+    margin-top: auto;
 `;
