@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import {
     createEffect,
     createEvent,
@@ -5,8 +6,9 @@ import {
     forward,
     sample
 } from "effector";
-import { ChangeEvent } from "react";
+
 import { request } from "api/request";
+import { addRequest } from "features/history-line/model";
 
 type RequestData = {
     data: string;
@@ -28,17 +30,17 @@ export const handleChanged = setField.prepend<ChangeEvent<HTMLTextAreaElement>>(
 
 export const sendRequestFx = createEffect({ handler: request });
 export const validateRequestFx = createEffect({
-    handler: ({ data }) => {
+    handler: ({ data }: RequestData) => {
         const parsedRequest = JSON.parse(data);
 
         return parsedRequest;
     }
 });
 export const prettifyRequestFx = createEffect({
-    handler: ({ data }) => {
-        const prettifyRequest = JSON.parse(JSON.stringify(data, null, "\t"));
+    handler: ({ data }: RequestData) => {
+        const prettyfiedRequest = JSON.parse(JSON.stringify(data, null, "\t"));
 
-        return prettifyRequest;
+        return prettyfiedRequest;
     }
 });
 
@@ -47,7 +49,7 @@ export const $textarea = createStore<RequestData>({
     error: false
 });
 
-export const $output = createStore<any>("");
+export const $output = createStore<string>("");
 
 $textarea
     .on(setField, (state, { value }) => {
@@ -80,7 +82,7 @@ sample({
 
 forward({
     from: validateRequestFx.doneData,
-    to: sendRequestFx
+    to: [sendRequestFx, addRequest]
 });
 
 sample({
