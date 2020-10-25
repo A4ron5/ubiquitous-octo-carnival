@@ -4,12 +4,11 @@ export type RequestType = {
     name: string;
     id: number;
     data: string;
-    open: boolean;
     status: string;
 };
 
+export const addRequest = createEvent<string>();
 export const removeRequest = createEvent<number>();
-export const openRequestMenu = createEvent<number>();
 export const copyRequest = createEvent<number>();
 
 export const putCopyRequestInBufferFx = createEffect<RequestType, string>({
@@ -31,20 +30,23 @@ export const putCopyRequestInBufferFx = createEffect<RequestType, string>({
 export const $historyLine = createStore<RequestType[]>(restore());
 
 $historyLine
+    .on(addRequest, (histories, request) => {
+        const id = histories.length + 2;
+        const parsedRequest = JSON.parse(JSON.stringify(request));
+
+        return [
+            ...histories,
+            {
+                id,
+                data: request,
+                name: parsedRequest && parsedRequest.action,
+                status: "success"
+            }
+        ];
+    })
     .on(removeRequest, (histories, id) =>
         histories.filter((item) => item.id !== id)
-    )
-    .on(openRequestMenu, (histories, id) => {
-        return histories.map((item) => {
-            if (item.id === id) {
-                return {
-                    ...item,
-                    open: !item.open
-                };
-            }
-            return item;
-        });
-    });
+    );
 
 sample({
     source: $historyLine,
@@ -54,50 +56,15 @@ sample({
 });
 
 function restore() {
-    return [
-        {
-            name: "action.get",
-            data: "action.get data",
-            id: 1,
-            open: false,
-            status: "fail"
-        },
-        {
-            name: "action.remove",
-            data: "action.remove data",
-            id: 2,
-            open: false,
-            status: "fail"
-        },
-        {
-            name: "action.put",
-            data: "action.put data",
-            id: 3,
-            open: false,
-            status: "success"
-        },
-        {
-            name: "action.store",
-            data: "action.store data",
-            id: 4,
-            open: false,
-            status: "fail"
-        },
-        {
-            name: "action.rename",
-            data: "action.rename data",
-            id: 5,
-            open: false,
-            status: "fail"
-        },
-        {
-            name: "action.replace",
-            data: "action.replace data",
-            id: 6,
-            open: false,
-            status: "success"
-        }
-    ];
+    const history = localStorage.getItem("historyLine");
+
+    if (history) {
+        return JSON.parse(history);
+    }
+
+    return [];
 }
 
-$historyLine.watch(console.log);
+$historyLine.watch((history) => {
+    localStorage.setItem("historyLine", JSON.stringify(history));
+});

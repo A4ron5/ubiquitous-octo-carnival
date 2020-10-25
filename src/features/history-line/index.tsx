@@ -7,7 +7,6 @@ import { Request } from "ui/molecules/request";
 import {
     $historyLine,
     removeRequest,
-    openRequestMenu,
     copyRequest
 } from "features/history-line/model";
 
@@ -16,7 +15,7 @@ export const HistoryLine = () => {
         <Request
             {...request}
             removeRequest={removeRequest}
-            openRequestMenu={openRequestMenu}
+            openRequestMenu={() => {}}
             copyRequest={copyRequest}
         />
     ));
