@@ -26,4 +26,12 @@ export const Button = styled.button`
     &:hover {
         opacity: 0.9;
     }
+
+    ${({ secondary }: { secondary?: boolean }) =>
+        secondary &&
+        css`
+            background: none;
+            color: #000;
+            width: auto;
+        `}
 `;
