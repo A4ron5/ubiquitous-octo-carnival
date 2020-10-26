@@ -1,11 +1,14 @@
 import * as React from "react";
+import { useStore } from "effector-react";
 
-import { clickSendButton } from "features/text-area/model";
+import { clickSendButton, sendRequestFx } from "features/text-area/model";
 import { Button } from "features/button";
 
 export const SendButton = () => {
+    const requestPending = useStore(sendRequestFx.pending);
+
     return (
-        <Button pending={false} clickHandler={clickSendButton}>
+        <Button pending={requestPending} clickHandler={clickSendButton}>
             Отправить
         </Button>
     );
