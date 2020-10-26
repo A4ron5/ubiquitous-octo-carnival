@@ -68,7 +68,7 @@ $textarea
         return { ...state, error: true };
     });
 
-$output.on(sendRequestFx.doneData, (state, data) => {
+$output.on([sendRequestFx.doneData, sendRequestFx.failData], (state, data) => {
     const prettify = JSON.stringify(data, null, "\t");
 
     return prettify;
@@ -82,7 +82,12 @@ sample({
 
 forward({
     from: validateRequestFx.doneData,
-    to: [sendRequestFx, addRequest]
+    to: sendRequestFx
+});
+
+forward({
+    from: sendRequestFx.finally,
+    to: addRequest
 });
 
 sample({
