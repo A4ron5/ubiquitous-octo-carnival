@@ -1,4 +1,4 @@
 export const statuses = {
-    success: true,
+    done: true,
     fail: false
 };
