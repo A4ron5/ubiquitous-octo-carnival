@@ -154,7 +154,7 @@ export const Request = (props: RequestProps) => {
         copyRequest
     } = props;
 
-    if (status === "success" || status === "fail") {
+    if (status === "done" || status === "fail") {
         return (
             <Wrapper>
                 <Info>
