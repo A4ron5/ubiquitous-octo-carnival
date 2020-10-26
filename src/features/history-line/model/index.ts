@@ -35,13 +35,13 @@ $historyLine
         const parsedRequest = JSON.parse(JSON.stringify(request));
 
         return [
-            ...histories,
             {
                 id,
-                data: request,
-                name: parsedRequest && parsedRequest.action,
-                status: "success"
-            }
+                data: parsedRequest.result,
+                name: parsedRequest.params.action || "error",
+                status: parsedRequest.status
+            },
+            ...histories
         ];
     })
     .on(removeRequest, (histories, id) =>
