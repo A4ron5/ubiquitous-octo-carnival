@@ -7,7 +7,7 @@ export type RequestType = {
     status: string;
 };
 
-export const addRequest = createEvent<string>();
+export const addRequest = createEvent<unknown>();
 export const removeRequest = createEvent<number>();
 export const copyRequest = createEvent<number>();
 
