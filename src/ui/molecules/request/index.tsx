@@ -6,7 +6,7 @@ import { statuses } from "lib/status";
 import { RequestType } from "features/history-line/model";
 
 type RequestProps = RequestType & {
-    openRequestMenu: Event<number>;
+    open: boolean;
     removeRequest: Event<number>;
     copyRequest: Event<number>;
 };
@@ -144,15 +144,7 @@ const Wrapper = styled.div`
 `;
 
 export const Request = (props: RequestProps) => {
-    const {
-        status,
-        name,
-        id,
-        open,
-        openRequestMenu,
-        removeRequest,
-        copyRequest
-    } = props;
+    const { status, name, id, open, removeRequest, copyRequest } = props;
 
     if (status === "done" || status === "fail") {
         return (
@@ -160,7 +152,7 @@ export const Request = (props: RequestProps) => {
                 <Info>
                     <Status status={statuses[status]} />
                     <Name>{name}</Name>
-                    <DotsButton onClick={() => openRequestMenu(id)}>
+                    <DotsButton>
                         <Dots open={open} />
                     </DotsButton>
                 </Info>
